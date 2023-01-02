@@ -381,6 +381,7 @@ fig1.update_layout(
 )
 st.plotly_chart(fig1, theme="streamlit", use_container_width=True)
 st.write('')
+st.write('')
 
 
 # In[40]:
@@ -389,7 +390,7 @@ st.write('')
 import altair as alt
 base=alt.Chart(df5).encode(x=alt.X('date:O', axis=alt.Axis(labelAngle=325)))
 line=base.mark_line(color='darkgreen').encode(y=alt.Y('high solana nft price sale % growth:Q', axis=alt.Axis(grid=True)))
-bar=base.mark_bar(color='green',opacity=0.5).encode(y='cumulative growth of highest price:Q')
+bar=base.mark_bar(color='green',opacity=0.5).encode(y='cumulative growth of highest solana nft price sale:Q')
 
 st.altair_chart((line + bar).resolve_scale(y='independent').properties(title='Daily and cumulative highest sale price % growth',width=600))
 
