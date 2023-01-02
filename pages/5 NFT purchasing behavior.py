@@ -248,6 +248,26 @@ div.css-50ug3q.e16fv1kl3{
 } 
 </style> """, unsafe_allow_html=True)
 
+st.markdown(""" <style> div.css-ocqkz7.e1tzin5v4{
+ background-color: #f5f5f5;
+ border: 2px solid;
+ padding: 10px 5px 5px 5px;
+ border-radius: 10px;
+ color: #ffc300;
+ box-shadow: 10px;
+}
+div.css-keje6w.ce1tzin5v2{
+ background-color: #f5f5f5;
+ border: 2px solid; /* #900c3f */
+ border-radius: 10px;
+ padding: 10px 5px 5px 5px;
+ color: orange;
+}
+div.css-12ukr4l.e1tzin5v0{
+ font-weight: 900;
+} 
+</style> """, unsafe_allow_html=True)
+
 col1,col2,col3 =st.columns(3)
 with col1:
     st.metric('Number of NFT sales', millify(df2['total solana nft sales'][0]))
