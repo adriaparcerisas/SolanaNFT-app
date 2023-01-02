@@ -343,8 +343,8 @@ order by 1 asc
   )
 SELECT
 date,
-  "NFT price sale growth",
-  sum("High Solana NFT price sale % growth") over (order by date) as "Cumulative growth"
+  "High Solana NFT price sale % growth" as "NFT price sale growth",
+  sum("NFT price sale growth") over (order by date) as "Cumulative growth"
 from final_data where date <='2022-04-27'
 order by 1 asc
 """
