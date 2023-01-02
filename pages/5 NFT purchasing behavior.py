@@ -344,7 +344,7 @@ order by 1 asc
 SELECT
 date,
   "High Solana NFT price sale % growth",
-  sum("High Solana NFT price sale % growth") over (order by date) as "Cumulative growth of Highest Solana NFT price sale"
+  sum("High Solana NFT price sale % growth") over (order by date) as "Cumulative growth"
 from final_data where date <='2022-04-27'
 order by 1 asc
 """
@@ -390,7 +390,7 @@ st.write('')
 import altair as alt
 base=alt.Chart(df5).encode(x=alt.X('date:O', axis=alt.Axis(labelAngle=325)))
 line=base.mark_line(color='darkgreen').encode(y=alt.Y('high solana nft price sale % growth:Q', axis=alt.Axis(grid=True)))
-bar=base.mark_bar(color='green',opacity=0.5).encode(y='cumulative growth of highest solana nft price sale:Q')
+bar=base.mark_bar(color='green',opacity=0.5).encode(y='cumulative growth:Q')
 
 st.altair_chart((line + bar).resolve_scale(y='independent').properties(title='Daily and cumulative highest sale price % growth',width=600))
 
