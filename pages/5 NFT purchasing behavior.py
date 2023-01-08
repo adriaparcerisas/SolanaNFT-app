@@ -62,7 +62,7 @@ case when sales_amount >500 then 'a. >500 SOL'
   else 'h. <0.5 SOL' end as "Price Range",
   count(distinct tx_id) as "Number of sales",
   count(distinct purchaser) as "Number of purchasers"
-from solana.fact_nft_sales
+from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
 group by 1
 order by 1
 """
@@ -75,13 +75,13 @@ WITH
   table1 as (
   SELECT
   count(distinct tx_id) as all_sales
-  from solana.fact_nft_sales
+  from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
   ),
   table2 as (
 SELECT
 count(case when sales_amount >1 then 1 end) as n_sales_above_1,
 count(case when sales_amount >10 then 1 end) as n_sales_above_10
-from solana.fact_nft_sales
+from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
 )
 SELECT
 all_sales as "Total Solana NFT sales",
@@ -100,18 +100,18 @@ WITH
   table1 as (
   SELECT
   count(distinct purchaser) as total_purchasers
-  from solana.fact_nft_sales
+  from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
   ),
   table2 as (
 SELECT
 count(distinct purchaser) as n_purchasers_above_10
-from solana.fact_nft_sales
+from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
   where sales_amount >10
 ),
   table3 as (
 SELECT
 count(distinct purchaser) as n_purchasers_above_100
-from solana.fact_nft_sales
+from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
   where sales_amount >100
 )
 SELECT
@@ -304,7 +304,7 @@ WITH
 SELECT
 trunc(block_timestamp,'day') as date,
   max(sales_amount) as high_NFT_price_sale
-from solana.fact_nft_sales
+from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
 group by 1
 order by 1 asc
   )
@@ -314,7 +314,7 @@ x.high_NFT_price_sale as "High Solana NFT price sale",
 lag(x.high_NFT_price_sale,1) over (order by x.date) as lasts,
 ((x.high_NFT_price_sale-lasts)/lasts)*100 as "High Solana NFT price sale % growth"
 from solana_sales x
-  where x.date >= '2021-12-10'
+  where x.date>=current_date-INTERVAL '1 MONTH'
 order by 1 asc
 """
 
@@ -327,7 +327,7 @@ WITH
 SELECT
 trunc(block_timestamp,'day') as date,
   max(sales_amount) as high_NFT_price_sale
-from solana.fact_nft_sales
+from solana.fact_nft_sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
 group by 1
 order by 1 asc
   ),
@@ -338,14 +338,14 @@ x.high_NFT_price_sale as "High Solana NFT price sale",
 lag(x.high_NFT_price_sale,1) over (order by x.date) as lasts,
 ((x.high_NFT_price_sale-lasts)/lasts)*100 as "High Solana NFT price sale % growth"
 from solana_sales x
-  where x.date >= '2021-12-10'
+  where x.date >=current_date-INTERVAL '1 MONTH'
 order by 1 asc
   )
 SELECT
 date,
   "High Solana NFT price sale % growth" as "NFT price sale growth",
   sum("NFT price sale growth") over (order by date) as "Cumulative growth"
-from final_data where date <='2022-04-27'
+from final_data where DATE>=CURRENT_DATE-INTERVAL '1 MONTH'
 order by 1 asc
 """
 
