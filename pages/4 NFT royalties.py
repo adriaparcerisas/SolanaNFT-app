@@ -62,7 +62,7 @@ SELECT
     count(distinct purchaser) as purchasers,
     sum(purchasers) over (partition by marketplace_type order by date) as cum_purchasers
   
-FROM solana.core.fact_nft_sales where date>=current_date-INTERVAL '1 MONTH'
+FROM solana.core.fact_nft_sales
 --WHERE marketplace in ('yawww', 'solanart', 'hadeswap', 'solport', 'coral cube') 
 GROUP BY 1,2 
 having NOT marketplace_type is NULL
@@ -81,7 +81,7 @@ SELECT
     count(distinct purchaser) as purchasers,
     sum(purchasers) over (partition by marketplace_type order by date) as cum_purchasers
   
-FROM solana.core.fact_nft_sales where date>=current_date-INTERVAL '1 MONTH'
+FROM solana.core.fact_nft_sales
 --WHERE marketplace in ('yawww', 'solanart', 'hadeswap', 'solport', 'coral cube') 
 GROUP BY 1,2 
 having NOT marketplace_type is NULL
@@ -100,7 +100,7 @@ SELECT
     count(distinct purchaser) as purchasers,
     sum(purchasers) over (partition by marketplace_type order by date) as cum_purchasers 
   
-FROM solana.core.fact_nft_sales where date>=current_date-INTERVAL '2 MONTHS'
+FROM solana.core.fact_nft_sales
 --WHERE marketplace in ('yawww', 'solanart', 'hadeswap', 'solport', 'coral cube') 
 GROUP BY 1,2 
 having NOT marketplace_type is NULL
@@ -618,7 +618,7 @@ SELECT
     sum(saless) over (partition by marketplace_type order by date) as cum_sales,
     count(distinct purchaser) as purchasers,
     sum(purchasers) over (partition by marketplace_type order by date) as cum_purchasers
-from tab1 where date>=current_date-INTERVAL '1 MONTH'
+from tab1 
 --LIMIT 100
 GROUP BY 1,2 
   
@@ -661,7 +661,7 @@ SELECT
     sum(saless) over (partition by marketplace_type order by date) as cum_sales,
     count(distinct purchaser) as purchasers,
     sum(purchasers) over (partition by marketplace_type order by date) as cum_purchasers
-from tab1 where date>=current_date-INTERVAL '1 MONTH'
+from tab1
 --LIMIT 100
 GROUP BY 1,2
 """
@@ -703,7 +703,7 @@ SELECT
     sum(saless) over (partition by marketplace_type order by date) as cum_sales,
     count(distinct purchaser) as purchasers,
     sum(purchasers) over (partition by marketplace_type order by date) as cum_purchasers
-from tab1 where date>=current_date-INTERVAL '2 MONTHS'
+from tab1
 --LIMIT 100
 GROUP BY 1,2
 """
