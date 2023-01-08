@@ -174,9 +174,9 @@ order by 2 desc
 )
 select
 "NFT Collection" as types,
-avg("Total 2023 transactions") as avg_total_transactions,
+avg("Total transactions") as avg_total_transactions,
 avg("24h transactions growth (%)") as avg_24h_growth_pcg,
-sum("Total 2023 buyers") as total_buyers
+sum("Total buyers") as total_buyers
 from types group by 1 order by 2 desc 
 """
 
