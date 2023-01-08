@@ -98,7 +98,7 @@ volume_24h_growth as "24h volume growth (%)",
 volume_7d_growth as "7d volume growth (%)",
 avg_nft_price as "Average sales price",
 total_users as "Total buyers"
-from final_data_2
+from final_data_2 where date=current_date-1
 order by 2 desc
 """
 
@@ -263,7 +263,3 @@ st.plotly_chart(fig2, theme="streamlit", use_container_width=True)
 
 
 # In[ ]:
-
-
-
-
