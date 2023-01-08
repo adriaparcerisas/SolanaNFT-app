@@ -60,7 +60,7 @@ SELECT
   avg(avg_nft_price) over (partition by collection order by date) as cum_avg_price,
   count(purchaser) as users,
   sum(users) over (partition by collection order by date) as cum_users
-from sales where BLOCK_TIMESTAMP>=current_date-INTERVAL '1 MONTH'
+from sales
 group by 1,2
 order by 1 asc
   ),
@@ -81,7 +81,7 @@ LAG(cum_volume_sales,7) IGNORE NULLS OVER (partition by collection ORDER BY date
 cum_avg_price as avg_nft_price,
 cum_users as total_users,
 rank() over (partition by date order by total_transactions desc) as rank
-from final_data where date>=current_date-INTERVAL '1 MONTH'
+from final_data
 order by date asc
   )
 SELECT
@@ -90,15 +90,15 @@ case when rank <10 then concat(collection,' 🟪')
     when rank between 100 and 1000 then concat(collection,' 🟠')
   else concat(collection,' 🔴')
   end as "NFT Collection",
-total_transactions as "Total 2023 transactions",
+total_transactions as "Total transactions",
 txs_24h_growth as "24h transactions growth (%)",
 txs_7d_growth as "7 days transactions growth (%)",
-total_volume_sales "Total 2023 volume (SOL)",
+total_volume_sales "Total volume (SOL)",
 volume_24h_growth as "24h volume growth (%)",
 volume_7d_growth as "7d volume growth (%)",
-avg_nft_price as "Average 2023 sales price",
-total_users as "Total 2023 buyers"
-from final_data_2 where date = CURRENT_DATE-1
+avg_nft_price as "Average sales price",
+total_users as "Total buyers"
+from final_data_2
 order by 2 desc
 """
 
@@ -130,7 +130,7 @@ SELECT
   avg(avg_nft_price) over (partition by collection order by date) as cum_avg_price,
   count(purchaser) as users,
   sum(users) over (partition by collection order by date) as cum_users
-from sales where date>=current_date-INTERVAL '1 MONTH'
+from sales
 group by 1,2
 order by 1 asc
   ),
@@ -151,7 +151,7 @@ LAG(cum_volume_sales,7) IGNORE NULLS OVER (partition by collection ORDER BY date
 cum_avg_price as avg_nft_price,
 cum_users as total_users,
 rank() over (partition by date order by total_transactions desc) as rank
-from final_data where date>=current_date-INTERVAL '1 MONTH'
+from final_data
 order by date asc
   ),
   types as (
@@ -161,15 +161,15 @@ case when rank <10 then '🟪 Stellar collections'
     when rank between 100 and 1000 then '🟠 Common collections'
   else '🔴 Other collections'
   end as "NFT Collection",
-total_transactions as "Total 2023 transactions",
+total_transactions as "Total transactions",
 txs_24h_growth as "24h transactions growth (%)",
 txs_7d_growth as "7 days transactions growth (%)",
-total_volume_sales "Total 2023 volume (SOL)",
+total_volume_sales "Total volume (SOL)",
 volume_24h_growth as "24h volume growth (%)",
 volume_7d_growth as "7d volume growth (%)",
-avg_nft_price as "Average 2023 sales price",
-total_users as "Total 2023 buyers"
-from final_data_2 where date = CURRENT_DATE-1
+avg_nft_price as "Average sales price",
+total_users as "Total buyers"
+from final_data_2
 order by 2 desc
 )
 select
