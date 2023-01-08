@@ -103,7 +103,7 @@ total_mints, sum(mints_growth_rate) over (order by date) as mints_growth_rate,
 total_sales, sum(sales_growth_rate) over (order by date) as sales_growth_rate,
 total_minters, sum(minters_growth_rate) over (order by date) as minters_growth_rate,
 total_purchasers, sum(purchasers_growth_rate) over (order by date) as purchasers_growth_rate
-from final_data where date>=current_date-INTERVAL '1 MONTH'
+from final_data
 order by 1 asc
 """
 
@@ -167,7 +167,7 @@ total_mints, sum(mints_growth_rate) over (order by date) as mints_growth_rate,
 total_sales, sum(sales_growth_rate) over (order by date) as sales_growth_rate,
 total_minters, sum(minters_growth_rate) over (order by date) as minters_growth_rate,
 total_purchasers, sum(purchasers_growth_rate) over (order by date) as purchasers_growth_rate
-from final_data where date>=current_date-INTERVAL '1 MONTH'
+from final_data
 order by 1 asc
 """
 
@@ -231,7 +231,7 @@ total_mints, sum(mints_growth_rate) over (order by date) as mints_growth_rate,
 total_sales, sum(sales_growth_rate) over (order by date) as sales_growth_rate,
 total_minters, sum(minters_growth_rate) over (order by date) as minters_growth_rate,
 total_purchasers, sum(purchasers_growth_rate) over (order by date) as purchasers_growth_rate
-from final_data where date>=current_date-INTERVAL '2 MONTHS'
+from final_data
 order by 1 asc
 """
 
