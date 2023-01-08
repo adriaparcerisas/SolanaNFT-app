@@ -55,7 +55,7 @@ SELECT
   avg(avg_nft_price) over (partition by secondary_market order by date) as cum_avg_price,
   count(purchaser) as users,
   sum(users) over (partition by secondary_market order by date) as cum_users
-from solana.core.fact_nft_sales
+from solana.core.fact_nft_sales where date>=current_date-INTERVAL '1 MONTH'
 group by 1,2
 order by 1 asc
 """
@@ -72,7 +72,7 @@ SELECT
   avg(avg_nft_price) over (partition by secondary_market order by date) as cum_avg_price,
   count(purchaser) as users,
   sum(users) over (partition by secondary_market order by date) as cum_users
-from solana.core.fact_nft_sales
+from solana.core.fact_nft_sales where date>=current_date-INTERVAL '1 MONTH'
 group by 1,2
 order by 1 asc
 """
@@ -89,7 +89,7 @@ SELECT
   avg(avg_nft_price) over (partition by secondary_market order by date) as cum_avg_price,
   count(purchaser) as users,
   sum(users) over (partition by secondary_market order by date) as cum_users
-from solana.core.fact_nft_sales
+from solana.core.fact_nft_sales where date>=current_date-INTERVAL '2 MONTHS'
 group by 1,2
 order by 1 asc
 """
