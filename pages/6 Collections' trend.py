@@ -185,6 +185,7 @@ from types group by 1 order by 2 desc
 
 
 st.experimental_memo(ttl=86400)
+@st.cache
 def compute(a):
     data=sdk.query(a)
     return data
